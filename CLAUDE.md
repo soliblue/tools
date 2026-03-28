@@ -33,14 +33,14 @@ Any of the 3 theme names above are valid values.
 
 ### Recommended keybinding
 
-For this setup, `cmd+t` should open a new untitled editor tab in the current VS Code window.
+For this setup, `cmd+t` should open a new terminal in the editor area of the current VS Code window.
 
 Use this user keybinding:
 
 ```json
 {
   "key": "cmd+t",
-  "command": "workbench.action.files.newUntitledFile"
+  "command": "workbench.action.createTerminalEditor"
 }
 ```
 

@@ -18,4 +18,4 @@ This repo is a small glimpse into the author's personal editor and terminal setu
 
 - `CLAUDE.md` documents the setup details for agents
 - `AGENTS.md` is a symlink to `CLAUDE.md`
-- Recommended local VS Code behavior: bind `cmd+t` to open a new untitled editor tab in the current window
+- Recommended local VS Code behavior: bind `cmd+t` to open a new terminal in the editor area as a new editor tab
