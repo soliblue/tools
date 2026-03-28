@@ -1,0 +1,30 @@
+{
+  "name": "majorelle",
+  "displayName": "Majorelle",
+  "description": "Deep indigo theme inspired by the Majorelle Garden in Marrakech",
+  "version": "0.1.0",
+  "publisher": "soli",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": ["Themes"],
+  "contributes": {
+    "themes": [
+      {
+        "label": "Majorelle",
+        "uiTheme": "vs-dark",
+        "path": "./themes/majorelle-color-theme.json"
+      },
+      {
+        "label": "Majorelle Medium",
+        "uiTheme": "vs-dark",
+        "path": "./themes/majorelle-medium-color-theme.json"
+      },
+      {
+        "label": "Majorelle Light",
+        "uiTheme": "vs-dark",
+        "path": "./themes/majorelle-light-color-theme.json"
+      }
+    ]
+  }
+}
