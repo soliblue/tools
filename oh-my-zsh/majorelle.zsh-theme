@@ -12,10 +12,6 @@
 #   Muted Blue:        60  (#546191)
 #   Red:              203  (#F44747)
 
-# Prompt symbol
-MAJORELLE_SYMBOL=${MAJORELLE_SYMBOL:-"$"}
-MAJORELLE_SYMBOL_ERROR=${MAJORELLE_SYMBOL_ERROR:-"$"}
-
 # Time display (set to false to hide)
 MAJORELLE_SHOW_TIME=${MAJORELLE_SHOW_TIME:-true}
 
@@ -78,18 +74,12 @@ _majorelle_time() {
 _majorelle_prompt() {
   local exit_code=$?
 
-  # Line 1: directory and git
-  echo -n "%F{111}%~%f"                    # blue directory path
+  # Single line: current folder and git
+  echo -n "%F{111}%1~%f"                   # blue current folder
   local git_info=$(_majorelle_git_info)
   [[ -n $git_info ]] && echo -n " %F{60}on%f $git_info"
-  echo ""                                  # newline
-
-  # Line 2: prompt symbol
-  if [[ $exit_code -ne 0 ]]; then
-    echo -n "%F{203}${MAJORELLE_SYMBOL_ERROR}%f "   # red on error
-  else
-    echo -n "%F{173}${MAJORELLE_SYMBOL}%f "          # coral accent
-  fi
+  # Keep the cursor on the same line without an extra prompt symbol.
+  echo -n " "
 }
 
 # Virtualenv + prompt
