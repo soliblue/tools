@@ -2,6 +2,8 @@
 
 Majorelle theme configurations for VS Code, iTerm2, and Oh My Zsh.
 
+This repo is also meant to give other people and their agents a compact glimpse into the author's personal setup.
+
 ## Files
 
 - `vscode/` contains a local VS Code theme extension with 3 themes:
@@ -28,6 +30,21 @@ Then set the active theme in:
 ```
 
 Any of the 3 theme names above are valid values.
+
+### Recommended keybinding
+
+For this setup, `cmd+t` should open a new untitled editor tab in the current VS Code window.
+
+Use this user keybinding:
+
+```json
+{
+  "key": "cmd+t",
+  "command": "workbench.action.files.newUntitledFile"
+}
+```
+
+This intentionally replaces VS Code's default `cmd+t` behavior for this machine.
 
 ## Oh My Zsh
 
