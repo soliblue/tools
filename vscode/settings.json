@@ -1,0 +1,11 @@
+{
+  "workbench.colorTheme": "Majorelle Light",
+  "workbench.editorAssociations": {
+    "*.md": "vscode.markdown.preview.editor"
+  },
+  "python.terminal.activateEnvironment": false,
+  "terminal.integrated.tabs.title": "${sequence}",
+  "files.exclude": {
+    "**/__pycache__": true
+  }
+}

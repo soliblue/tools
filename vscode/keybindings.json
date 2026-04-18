@@ -1,0 +1,26 @@
+[
+  {
+    "key": "cmd+t",
+    "command": "workbench.action.createTerminalEditor"
+  },
+  {
+    "key": "cmd+g",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "workbench.action.createTerminalEditor",
+        {
+          "command": "workbench.action.terminal.sendSequence",
+          "args": {
+            "text": "sleep 0.2 && cd \"/Users/ahmed.soliman/Coding/ai-videos\" && CODEX_HOME=\"/Users/ahmed.soliman/Coding/ai-videos/.codex\" codex\n"
+          }
+        }
+      ]
+    },
+    "when": "config.codex.projectKeybinding"
+  },
+  {
+    "key": "cmd+i",
+    "command": "majorelle.openInBrowser"
+  }
+]

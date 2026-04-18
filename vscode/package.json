@@ -1,14 +1,22 @@
 {
   "name": "majorelle",
   "displayName": "Majorelle",
-  "description": "Deep indigo theme inspired by the Majorelle Garden in Marrakech",
-  "version": "0.1.0",
+  "description": "Deep indigo theme and custom icons inspired by the Majorelle Garden in Marrakech",
+  "version": "0.4.1",
   "publisher": "soli",
   "engines": {
     "vscode": "^1.80.0"
   },
-  "categories": ["Themes"],
+  "categories": ["Themes", "Other"],
+  "activationEvents": ["onUri", "onCommand:majorelle.openInBrowser"],
+  "main": "./extension.js",
   "contributes": {
+    "commands": [
+      {
+        "command": "majorelle.openInBrowser",
+        "title": "Majorelle: Open URL in Browser"
+      }
+    ],
     "themes": [
       {
         "label": "Majorelle",
@@ -25,6 +33,150 @@
         "uiTheme": "vs-dark",
         "path": "./themes/majorelle-light-color-theme.json"
       }
-    ]
+    ],
+    "markdown.previewStyles": [
+      "./markdown.css"
+    ],
+    "icons": {
+      "custom-alien": {
+        "description": "alien icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\F11F" }
+      },
+      "custom-binoculars": {
+        "description": "binoculars icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\F11E" }
+      },
+      "custom-bird": {
+        "description": "bird icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\F11D" }
+      },
+      "custom-brain": {
+        "description": "brain icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\E003" }
+      },
+      "custom-bug": {
+        "description": "bug icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\F11C" }
+      },
+      "custom-cat": {
+        "description": "cat icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\F11B" }
+      },
+      "custom-claude": {
+        "description": "claude sparkle icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\F11A" }
+      },
+      "custom-clawd": {
+        "description": "clawd pixel creature icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\F119" }
+      },
+      "custom-coffee": {
+        "description": "coffee icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\F118" }
+      },
+      "custom-crown": {
+        "description": "crown icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\F117" }
+      },
+      "custom-detective": {
+        "description": "detective icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\F116" }
+      },
+      "custom-diamond": {
+        "description": "diamond icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\F115" }
+      },
+      "custom-dog": {
+        "description": "dog icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\F114" }
+      },
+      "custom-eye": {
+        "description": "eye icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\F113" }
+      },
+      "custom-fire": {
+        "description": "fire icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\F112" }
+      },
+      "custom-flask": {
+        "description": "flask icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\F111" }
+      },
+      "custom-ghost": {
+        "description": "ghost icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\F110" }
+      },
+      "custom-graduation-cap": {
+        "description": "graduation cap icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\F10F" }
+      },
+      "custom-hammer": {
+        "description": "hammer icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\F10E" }
+      },
+      "custom-heart": {
+        "description": "heart icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\F10D" }
+      },
+      "custom-lightning": {
+        "description": "lightning icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\E002" }
+      },
+      "custom-magic-wand": {
+        "description": "magic wand icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\F10C" }
+      },
+      "custom-microscope": {
+        "description": "microscope icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\F10B" }
+      },
+      "custom-robot": {
+        "description": "robot icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\F10A" }
+      },
+      "custom-rocket": {
+        "description": "rocket icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\E001" }
+      },
+      "custom-rocket-launch": {
+        "description": "rocket launch icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\F109" }
+      },
+      "custom-shield-star": {
+        "description": "shield star icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\F108" }
+      },
+      "custom-skull": {
+        "description": "skull icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\F107" }
+      },
+      "custom-smiley": {
+        "description": "smiley icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\F105" }
+      },
+      "custom-smiley-wink": {
+        "description": "smiley wink icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\F106" }
+      },
+      "custom-sparkle": {
+        "description": "sparkle icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\F104" }
+      },
+      "custom-star": {
+        "description": "star icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\F103" }
+      },
+      "custom-sword": {
+        "description": "sword icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\F102" }
+      },
+      "custom-wrench": {
+        "description": "wrench icon",
+        "default": { "fontPath": "./fonts/custom-icons.woff", "fontCharacter": "\\F101" }
+      }
+    }
+  },
+  "devDependencies": {
+    "fantasticon": "^4.1.0"
   }
 }

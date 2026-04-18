@@ -14,6 +14,14 @@ This repo is a small glimpse into the author's personal editor and terminal setu
 - `iterm/`: matching `.itermcolors` presets
 - `oh-my-zsh/`: matching shell prompt theme
 
+## Theme Variants
+
+| Variant | UI Theme | Best For |
+|---------|----------|----------|
+| Majorelle | Dark | Late-night coding |
+| Majorelle Medium | Dark | Balanced contrast |
+| Majorelle Light | Dark | Lighter background |
+
 ## Notes
 
 - `CLAUDE.md` documents the setup details for agents
