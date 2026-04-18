@@ -19,8 +19,8 @@ This repo is a small glimpse into the author's personal editor and terminal setu
 | Variant | UI Theme | Best For |
 |---------|----------|----------|
 | Majorelle | Dark | Late-night coding |
-| Majorelle Medium | Dark | Balanced contrast |
-| Majorelle Light | Dark | Lighter background |
+| Majorelle Medium | Dark | Softer indigo background |
+| Majorelle Light | Light | Warm off-white background |
 
 ## Notes
 

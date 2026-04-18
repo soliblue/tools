@@ -7,5 +7,10 @@
   "terminal.integrated.tabs.title": "${sequence}",
   "files.exclude": {
     "**/__pycache__": true
-  }
+  },
+  "workbench.statusBar.visible": false,
+  "window.commandCenter": false,
+  "workbench.layoutControl.enabled": false,
+  "workbench.activityBar.location": "hidden",
+  "explorer.openEditors.visible": 0
 }

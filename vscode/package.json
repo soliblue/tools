@@ -30,7 +30,7 @@
       },
       {
         "label": "Majorelle Light",
-        "uiTheme": "vs-dark",
+        "uiTheme": "vs",
         "path": "./themes/majorelle-light-color-theme.json"
       }
     ],

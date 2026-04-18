@@ -1,3 +1,20 @@
+html,
+html body,
+html body.vscode-light,
+html body.vscode-dark,
+html body.vscode-high-contrast,
+html body.vscode-high-contrast-light,
+.markdown-body,
+.vscode-body {
+  background-color: var(--vscode-editor-background, #F5EEDC) !important;
+  color: var(--vscode-editor-foreground, #1E2750) !important;
+}
+
+body pre,
+body code {
+  background-color: var(--vscode-textCodeBlock-background, rgba(30, 39, 80, 0.08)) !important;
+}
+
 table {
   border-collapse: collapse;
   width: 100%;

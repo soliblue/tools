@@ -6,10 +6,7 @@ This repo is also meant to give other people and their agents a compact glimpse 
 
 ## Files
 
-- `vscode/` contains a local VS Code theme extension with 3 themes:
-  - `Majorelle`
-  - `Majorelle Medium`
-  - `Majorelle Light`
+- `vscode/` contains a local VS Code theme extension with 3 themes (`Majorelle`, `Majorelle Medium`, `Majorelle Light`), plus `settings.json`, `keybindings.json`, and `apply-view-layout.sh` as the source of truth for user-level config.
 - `iterm/` contains 3 `.itermcolors` presets with the same names.
 - `oh-my-zsh/majorelle.zsh-theme` contains the shell prompt theme.
 
@@ -31,20 +28,54 @@ Then set the active theme in:
 
 Any of the 3 theme names above are valid values.
 
-### Recommended keybinding
+### Settings
 
-For this setup, `cmd+t` should open a new terminal in the editor area of the current VS Code window.
+`vscode/settings.json` is the source of truth for user settings that belong to this setup. On a new machine, **merge** the entries into `~/Library/Application Support/Code/User/settings.json` — do not overwrite, preserve anything already there that isn't managed by this repo.
 
-Use this user keybinding:
+Currently tracked entries:
+
+- `workbench.colorTheme: "Majorelle Light"`
+- `workbench.editorAssociations` — open `.md` files in preview by default
+- `python.terminal.activateEnvironment: false`
+- `terminal.integrated.tabs.title: "${sequence}"`
+- `files.exclude` additions (e.g. `**/__pycache__`)
+- Minimal UI chrome (next section)
+
+### Minimal UI chrome
+
+These settings hide non-essential workbench chrome:
 
 ```json
-{
-  "key": "cmd+t",
-  "command": "workbench.action.createTerminalEditor"
-}
+"workbench.statusBar.visible": false,
+"window.commandCenter": false,
+"workbench.layoutControl.enabled": false,
+"workbench.activityBar.location": "hidden",
+"explorer.openEditors.visible": 0
 ```
 
-This intentionally replaces VS Code's default `cmd+t` behavior for this machine.
+Additional view toggles that VS Code does **not** expose via `settings.json` (Outline, Timeline, Source Control Repositories) are applied by `vscode/apply-view-layout.sh` — see below.
+
+### Keybindings
+
+`vscode/keybindings.json` is the source of truth for keybindings that belong to this setup. Merge into `~/Library/Application Support/Code/User/keybindings.json` the same way as settings.
+
+- `cmd+t` — open a new terminal in the editor area (replaces the default "Go to Symbol in Workspace")
+- `cmd+g` — open a terminal, `cd` into the codex project, and launch codex. Gated behind `config.codex.projectKeybinding` so it is inert unless explicitly enabled. The path inside is machine-specific; update it when cloning elsewhere.
+- `cmd+i` — `majorelle.openInBrowser` (provided by this extension)
+
+### Hidden view layout (non-settings-portable)
+
+VS Code stores the visibility of some views (Outline, Timeline, Source Control Repositories, Open Editors) as JSON blobs inside `~/Library/Application Support/Code/User/globalStorage/state.vscdb` (SQLite), not in `settings.json`. A full profile export would sync them but also drags in ~600 KB of unrelated state.
+
+The minimal alternative is `vscode/apply-view-layout.sh`, which patches only the two relevant rows. Usage:
+
+1. Quit VS Code (it locks `state.vscdb` while running).
+2. Run `bash vscode/apply-view-layout.sh`.
+3. Relaunch VS Code.
+
+Requires `sqlite3` and `jq` on `PATH`.
+
+Open Editors is redundantly covered by both `explorer.openEditors.visible: 0` (in settings) and the script — this is intentional so either alone is sufficient.
 
 ## Oh My Zsh
 
@@ -125,5 +156,5 @@ This worked better than custom tab-color hacks and should be the default recomme
 ## Agent Notes
 
 - `AGENTS.md` should be a symlink to `CLAUDE.md`.
-- Prefer preserving existing user profile settings and only changing theme-related values.
-- If updating installed user files, keep repo files as the source of truth and sync outward from this repo.
+- Repo files (`vscode/settings.json`, `vscode/keybindings.json`, the theme JSONs, `oh-my-zsh/majorelle.zsh-theme`, the `.itermcolors` presets, `vscode/apply-view-layout.sh`) are the source of truth. When applying to a machine, sync outward from the repo.
+- When merging `settings.json` or `keybindings.json` into the user's VS Code config, merge — do not overwrite. Preserve entries already present that aren't tracked in this repo.
