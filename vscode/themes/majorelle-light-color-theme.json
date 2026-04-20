@@ -197,7 +197,14 @@
     "commandCenter.border": "#D4C9A9",
     "commandCenter.foreground": "#3A4A78",
     "commandCenter.activeBackground": "#EDE4CB",
-    "commandCenter.activeForeground": "#1E2750"
+    "commandCenter.activeForeground": "#1E2750",
+
+    "textCodeBlock.background": "#E3D6B5",
+    "textLink.foreground": "#2A3568",
+    "textLink.activeForeground": "#CC7257",
+    "textBlockQuote.background": "#E3D6B560",
+    "textBlockQuote.border": "#CC7257",
+    "textPreformat.foreground": "#5A8A4A"
   },
   "tokenColors": [
     {

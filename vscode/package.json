@@ -2,21 +2,76 @@
   "name": "majorelle",
   "displayName": "Majorelle",
   "description": "Deep indigo theme and custom icons inspired by the Majorelle Garden in Marrakech",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "publisher": "soli",
   "engines": {
     "vscode": "^1.80.0"
   },
   "categories": ["Themes", "Other"],
-  "activationEvents": ["onUri", "onCommand:majorelle.openInBrowser"],
+  "activationEvents": ["onStartupFinished", "onUri"],
   "main": "./extension.js",
   "contributes": {
     "commands": [
       {
         "command": "majorelle.openInBrowser",
         "title": "Majorelle: Open URL in Browser"
+      },
+      {
+        "command": "majorelle.attention.focus",
+        "title": "Majorelle: Focus Claude Terminal"
+      },
+      {
+        "command": "majorelle.attention.clear",
+        "title": "Clear",
+        "icon": "$(close)"
+      },
+      {
+        "command": "majorelle.attention.clearAll",
+        "title": "Clear All",
+        "icon": "$(clear-all)"
+      },
+      {
+        "command": "majorelle.attention.refresh",
+        "title": "Refresh",
+        "icon": "$(refresh)"
       }
     ],
+    "views": {
+      "explorer": [
+        {
+          "id": "majorelle.attention",
+          "name": "Claude · Attention",
+          "icon": "$(bell-dot)"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "majorelle.attention",
+        "contents": "No Claude sessions in this workspace are waiting for you.\n\nWhen an agent finishes responding, it will appear here. Click an entry to jump back to its terminal."
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "majorelle.attention.refresh",
+          "when": "view == majorelle.attention",
+          "group": "navigation@1"
+        },
+        {
+          "command": "majorelle.attention.clearAll",
+          "when": "view == majorelle.attention",
+          "group": "navigation@2"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "majorelle.attention.clear",
+          "when": "view == majorelle.attention && viewItem == majorelleAttentionEntry",
+          "group": "inline"
+        }
+      ]
+    },
     "themes": [
       {
         "label": "Majorelle",

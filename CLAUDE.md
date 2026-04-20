@@ -9,6 +9,7 @@ This repo is also meant to give other people and their agents a compact glimpse 
 - `vscode/` contains a local VS Code theme extension with 3 themes (`Majorelle`, `Majorelle Medium`, `Majorelle Light`), plus `settings.json`, `keybindings.json`, and `apply-view-layout.sh` as the source of truth for user-level config.
 - `iterm/` contains 3 `.itermcolors` presets with the same names.
 - `oh-my-zsh/majorelle.zsh-theme` contains the shell prompt theme.
+- `hooks/` contains Claude Code hook scripts used by the extension's attention view.
 
 ## VS Code
 
@@ -55,13 +56,32 @@ These settings hide non-essential workbench chrome:
 
 Additional view toggles that VS Code does **not** expose via `settings.json` (Outline, Timeline, Source Control Repositories) are applied by `vscode/apply-view-layout.sh` — see below.
 
+### Claude · Attention view
+
+The extension contributes a view inside the Explorer sidebar that lists Claude Code sessions whose agent has finished responding and is waiting on the user. The view is scoped per workspace: only sessions whose `cwd` is inside one of the current window's workspace folders are shown, so other projects' sessions never bleed in.
+
+How it works:
+
+- Four hooks in `hooks/` write to a shared state file at `~/.claude/attention.json`:
+  - `attention-stop.sh` runs on `Stop` and records the entry with `kind: "stop"`. It walks its process tree up to the first `zsh`/`bash`/`fish` ancestor to capture the PID of the shell that VS Code's terminal owns.
+  - `attention-notify.sh` runs on `Notification` (permission prompts, idle alerts) and records the entry with `kind: "notification"`, using the notification message as the label snippet.
+  - `attention-clear-notification.sh` runs on `PostToolUse` and flips `notification`-kind entries back to `kind: "running"` once the approved tool finishes (subject to a 2-second minimum age). The notify hook stashes the prior running label in a `running_text` field so this flip can restore it — the row stays visible with the play icon until `Stop` fires. `stop`/`running` entries are left alone.
+  - `attention-running.sh` runs on `UserPromptSubmit` and records the entry with `kind: "running"`, using the user's prompt as the label snippet. It overwrites any previous `stop`/`notification` state; a later `Stop` or `Notification` hook will overwrite it back when the agent pauses or finishes.
+- The extension picks a different codicon per `kind`: `bell-dot` for `stop`, `warning` for `notification`, `play` for `running`.
+- The extension watches `~/.claude/attention.json`, filters by workspace folder, and renders one tree item per session.
+- Clicking an item calls `Terminal.processId` for each open terminal and focuses the one matching `shell_pid`. If the terminal is gone, a notification explains so.
+
+The hooks are wired in this repo's own `.claude/settings.json` using `$CLAUDE_PROJECT_DIR` so the paths stay portable when the repo is cloned elsewhere. That scoping means the attention view only lights up for Claude sessions started inside this project — which is usually what you want. To cover every project, copy the same two hook entries into `~/.claude/settings.json` instead (or additionally) with absolute paths.
+
+Requires `jq` on `PATH` (already required by `apply-view-layout.sh`).
+
 ### Keybindings
 
 `vscode/keybindings.json` is the source of truth for keybindings that belong to this setup. Merge into `~/Library/Application Support/Code/User/keybindings.json` the same way as settings.
 
-- `cmd+t` — open a new terminal in the editor area (replaces the default "Go to Symbol in Workspace")
-- `cmd+g` — open a terminal, `cd` into the codex project, and launch codex. Gated behind `config.codex.projectKeybinding` so it is inert unless explicitly enabled. The path inside is machine-specific; update it when cloning elsewhere.
-- `cmd+i` — `majorelle.openInBrowser` (provided by this extension)
+- <kbd>⌘ T</kbd> — open a new terminal in the editor area (replaces the default "Go to Symbol in Workspace")
+- <kbd>⌘ G</kbd> — open a terminal, `cd` into the codex project, and launch codex. Gated behind `config.codex.projectKeybinding` so it is inert unless explicitly enabled. The path inside is machine-specific; update it when cloning elsewhere.
+- <kbd>⌘ I</kbd> — `majorelle.openInBrowser` (provided by this extension)
 
 ### Hidden view layout (non-settings-portable)
 
